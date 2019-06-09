@@ -116,7 +116,6 @@ func (b *Bucket) Add(count int, keyID string) bool {
 	return false
 }
 
-// NewBucket creates a new bucket directly if you're not using the handler
 func (m *ThrottleManager) newBucket(handler Handler, size int, leakRatePerMin int, keyFunc KeyFunc, bucketName string) *Bucket {
 	bucket := &Bucket{
 		size:       size,
