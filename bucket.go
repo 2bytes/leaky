@@ -11,6 +11,7 @@
 package leaky
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -18,8 +19,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-redis/redis"
+	"github.com/go-redis/redis/v8"
 )
+
+var ctx = context.Background()
 
 // Handler creates a new rate limiting leaky bucket handler
 type Handler func(w http.ResponseWriter, r *http.Request)
@@ -62,7 +65,7 @@ func (b *Bucket) getKey(keyID string) string {
 
 func (b *Bucket) setState(updatedState bucketState, keyID string) {
 
-	if err := b.redis.Set(b.getKey(keyID), updatedState, time.Hour).Err(); err != nil && err != redis.Nil {
+	if err := b.redis.Set(ctx, b.getKey(keyID), updatedState, time.Hour).Err(); err != nil && err != redis.Nil {
 		log.Printf("Setting bucket state failed: %q\n", err)
 	}
 }
@@ -71,7 +74,7 @@ func (b *Bucket) getState(keyID string) bucketState {
 
 	lastState := bucketState{}
 
-	if err := b.redis.Get(b.getKey(keyID)).Scan(&lastState); err != nil {
+	if err := b.redis.Get(ctx, b.getKey(keyID)).Scan(&lastState); err != nil {
 		if err != redis.Nil {
 			log.Printf("Retrieving bucket state failed, resetting counters: %s\n", err)
 		}

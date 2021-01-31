@@ -5,6 +5,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,7 +13,7 @@ import (
 	"strings"
 
 	"github.com/2bytes/leaky"
-	"github.com/go-redis/redis"
+	"github.com/go-redis/redis/v8"
 )
 
 func myEndpoint(w http.ResponseWriter, r *http.Request) {
@@ -34,7 +35,7 @@ func main() {
 		DB:       0,
 	})
 
-	if _, err := rc.Ping().Result(); err != nil {
+	if _, err := rc.Ping(context.Background()).Result(); err != nil {
 		log.Printf("Failed to ping Redis server: %s\n", err)
 		os.Exit(1)
 	} else {

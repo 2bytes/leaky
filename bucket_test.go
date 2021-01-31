@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alicebob/miniredis"
-	"github.com/go-redis/redis"
+	"github.com/alicebob/miniredis/v2"
+	"github.com/go-redis/redis/v8"
 )
 
 var (

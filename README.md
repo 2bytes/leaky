@@ -1,11 +1,11 @@
-# Leaky Bucket Throttling Rate Limiter v0.1.0
+# Leaky Bucket Throttling Rate Limiter v0.1.0 [![Go Report Card](https://goreportcard.com/badge/github.com/2bytes/leaky)](https://goreportcard.com/report/github.com/2bytes/leaky)
 
 Implementation of the Leaky Bucket rate limiter as a Golang Middleware
 
 ## Prerequisites
 
 * A running Redis instance to connect to and store real time state.
-* A Redis client instance from [go-redis](https://github.com/go-redis/redis)
+* A Redis client instance from [go-redis](https://github.com/go-redis/redis/v8)
 
 Usage:
 
@@ -16,7 +16,7 @@ Then import the middlware and go-redis
 ```
 import (
     "github.com/2bytes/leaky"
-    "github.com/go-redis/redis"
+    "github.com/go-redis/redis/v8"
 )
 ```
 Create your redis client instance as necessary, then instantiate the ThrottlingManager using it.
