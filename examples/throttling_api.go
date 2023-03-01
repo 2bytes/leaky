@@ -13,7 +13,7 @@ import (
 	"strings"
 
 	"github.com/2bytes/leaky"
-	"github.com/go-redis/redis/v8"
+	"github.com/redis/go-redis/v9"
 )
 
 func myEndpoint(w http.ResponseWriter, r *http.Request) {
