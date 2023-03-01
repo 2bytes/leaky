@@ -127,6 +127,7 @@ func (m *ThrottleManager) newBucket(handler Handler, size int, leakRatePerMin in
 		keyFunc:    keyFunc,
 		redis:      m.redis,
 		bucketName: bucketName,
+		state:      bucketState{LastUpdate: time.Now(), SpaceRemaining: float64(size)},
 	}
 
 	return bucket
